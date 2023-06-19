@@ -16,7 +16,7 @@ public class User {
     private String phone;
     private String adress;
     private String email;
-    private String passWord;
+    private String password;
     @OneToOne
     private Account account;
 

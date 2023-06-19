@@ -17,6 +17,5 @@ public class Account {
     private  String swift;
     private float amount;
     private String iban;
-    @OneToOne
-    private User user;
+
 }
