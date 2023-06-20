@@ -5,18 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @AllArgsConstructor @NoArgsConstructor @Data
-public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class beneficiary {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private  String swift;
-    private float amount;
+    private String name;
     private String iban;
-    @OneToOne
+    private float amount;
+    @ManyToOne
     private User user;
 
 
