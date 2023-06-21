@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="/layout.html">
+<head>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link  href="../bootstrap.min.css" rel="stylesheet">
+    <link  href="../style.css" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content">
+
+    <body>
+    <h1>Please Log In</h1>
+    <div th:if="${param.error}">
+        Invalid username and password.</div>
+    <div th:if="${param.logout}">
+        You have been logged out.</div>
+    <form th:action="@{/login}" method="post">
+        <div>
+            <input type="text" name="email" placeholder="email"/>
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Password"/>
+        </div>
+        <input type="submit" value="Log in" />
+    </form>
+    </body>
+
+
+</div>
+
+</body>
+</html>

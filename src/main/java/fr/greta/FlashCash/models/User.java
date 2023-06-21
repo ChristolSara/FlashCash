@@ -1,11 +1,12 @@
 package fr.greta.FlashCash.models;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,8 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor @Data
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "firstname is mandatory")
     private String firstName;
@@ -25,6 +27,7 @@ public class User {
     private String phone;
     @NotBlank(message = "adress is mandatory")
     private String adress;
+    @Column(unique = true)
     @NotBlank(message = "email is mandatory")
     private String email;
     @NotBlank(message = "password is mandatory")
