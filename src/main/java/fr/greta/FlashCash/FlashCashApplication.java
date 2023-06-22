@@ -18,7 +18,7 @@ public class FlashCashApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FlashCashApplication.class, args);
 	}
-	//@Bean
+	@Bean
 	CommandLineRunner start(AccountRepository accountRepository, UserRepository userRepository) {
 		return args -> {
 //

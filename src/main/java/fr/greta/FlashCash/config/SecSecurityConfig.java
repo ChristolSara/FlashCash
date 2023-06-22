@@ -22,7 +22,7 @@ public class SecSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/bootstap.min.css","/img")
+                .requestMatchers("bootstrap.min.css","/login/**","/signUp","/home","style.css","logo.png")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -31,7 +31,7 @@ public class SecSecurityConfig {
                 .loginPage("/login")
                 .usernameParameter("email")
                 .permitAll()
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/home", true)
                 .and()
                 .httpBasic()
                 .and()
