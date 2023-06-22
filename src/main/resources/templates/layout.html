@@ -27,13 +27,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-                <a class="nav-link active" aria-current="page" href="@{/home}">Home</a>
-                <a class="nav-link" href="@{/signUp}">Account</a>
-                <a class="nav-link" href="#">Training</a>
-                <a class="nav-link" href="#">Transactions</a>
+                <a class="nav-link active" aria-current="page"  th:href="@{home}">Home</a>
+                <a class="nav-link" th:href="@{/account}">Account</a>
+                <a class="nav-link" th:href="@{/}">Training</a>
+                <a class="nav-link" href="">Transactions</a>
 
-                <a class="nav-link" href="@{/users}">Beneficery</a>
-                <a class="nav-link" href="@{/update}">Settings</a>
+                <a class="nav-link" th:href="@{/users}">Beneficery</a>
+                <a class="nav-link" th:href="@{/update}">Settings</a>
+                <a class="nav-link" th:href="@{/signUp}">Sign Up</a>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
 
             </div>
         </div>

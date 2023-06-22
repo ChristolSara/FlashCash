@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="/layout.html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>add account</title>
+    <link  href="../bootstrap.min.css" rel="stylesheet">
+    <link  href="../style.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
+<div layout:fragment="content">
+    <form   action="#" th:action="@{/addAccount}" th:object="${account}" method="post" >
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input name="swift" class="form-control" th:value="${account.swift}"placeholder="swift" type="text">
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input name="amount" class="form-control" th:value="${account.amount}" placeholder="amount" type="number">
+        </div>
+        <!-- form-group// -->
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+            </div>
+            <input name="iban" class="form-control" th:value="${account.iban}" placeholder="iban" type="text">
+        </div> <!-- form-group// -->
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+        </div> <!-- form-group// -->
+        <p class="text-center">Have an account? <a th:href="@{login}">Log In</a> </p>
+    </form>
+
+
+</div>
 
 </body>
 </html>
