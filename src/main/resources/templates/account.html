@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="/layout.html">
+
 <head>
     <meta charset="UTF-8">
     <title>add account</title>
@@ -14,6 +15,7 @@
 </head>
 <body>
 <div layout:fragment="content">
+
     <form   action="#" th:action="@{/addAccount}" th:object="${account}" method="post" >
 
         <div class="form-group input-group">
@@ -40,6 +42,8 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
         </div> <!-- form-group// -->
+
+
         <p class="text-center">Have an account? <a th:href="@{login}">Log In</a> </p>
     </form>
 

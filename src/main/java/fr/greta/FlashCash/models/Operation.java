@@ -20,7 +20,7 @@ public class Operation {
     @ManyToOne
     private Account account;
     @ManyToOne
-    private beneficiary beneficiary;
+    private Beneficiary beneficiary;
 
 
 }

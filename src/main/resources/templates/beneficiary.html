@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="/layout.html">
+<head>
+  <meta charset="utf-8"/>
+  <title>beneficiary list</title>
+  <link  href="../bootstrap.min.css" rel="stylesheet">
+  <link  href="../style.css" rel="stylesheet">
+  <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+  <script src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.js"></script>
+  <script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
+</head>
+<body>
+<div layout:fragment="content">
+
+  <h2>List Beneficiary</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th><th>Name</th> <th>iban</th> <th>amount</th>
+    </tr>
+    <tr th:each="p:${beneficiaryList}">
+      <td th:text="${p.id}"></td>
+      <td th:text="${p.name}"></td>
+      <td th:text="${p.iban}"></td>
+      <td th:text="${p.amount}"></td>
+
+
+    </tr>
+    </thead>
+  </table>
+
+
+
+
+  <form  class="beneficiaryForm" action="#" th:action="@{/addBeneficiary}" th:object="${beneficiary}" method="post" >
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <input name="name" class="form-control" th:value="${beneficiary.name}"placeholder="name" type="text">
+    </div>
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+      </div>
+      <input name="iban" class="form-control" th:value="${beneficiary.iban}" placeholder="iban" type="text">
+    </div>
+    <!-- form-group// -->
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+      </div>
+      <input name="amount" class="form-control" th:value="${beneficiary.amount}" placeholder="amount" type="number">
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block"> Add Beneficiary </button>
+    </div> <!-- form-group// -->
+
+  </form>
+
+
+</div>
+
+
+</body>
+</html>

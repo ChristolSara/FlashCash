@@ -8,13 +8,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @AllArgsConstructor
 public class accountController {
 private AccountService accountService;
-
+    @GetMapping("/account")
+    String account(Model model) {
+        Account account = new Account();
+        model.addAttribute(account);
+        return "account";
+    }
     @PostMapping("/addAccount")
     public String addAccount(@Valid Account account, BindingResult result, Model model) {
         accountService.addAccount(account,result);

@@ -26,11 +26,11 @@ public class UsersController {
     private UserService userService;
 
 
-    @GetMapping("/users")
-    public String allUsers(Model model) {
-        model.addAttribute("users");
-        return "users";
-    }
+//    @GetMapping("/users")
+//    public String allUsers(Model model) {
+//        model.addAttribute("users");
+//        return "users";
+//    }
 
     @GetMapping("signUp")
     public String addUser( User user){

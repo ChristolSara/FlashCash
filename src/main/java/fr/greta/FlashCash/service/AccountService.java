@@ -12,13 +12,14 @@ import org.springframework.validation.BindingResult;
 @Service
 @AllArgsConstructor
 public class AccountService {
-    private AccountRepository accountRepository;
+    private final  AccountRepository accountRepository;
+    private final SessionService sessionService;
 
     public void addAccount(@Valid Account account, BindingResult result) {
+
         if (!result.hasErrors()) {
-
+            account.setUser(sessionService.sessionUser());
          accountRepository.save(account);
-
         }
     }
 }

@@ -22,7 +22,7 @@ public class SecSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("bootstrap.min.css","/login/**","/signUp","/home","style.css","logo.png")
+                .requestMatchers("bootstrap.min.css","/login/**","/signUp","/home","style.css","logo.png","/account")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

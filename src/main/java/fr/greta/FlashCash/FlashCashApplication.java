@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class FlashCashApplication {
@@ -18,18 +19,26 @@ public class FlashCashApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FlashCashApplication.class, args);
 	}
-	@Bean
-	CommandLineRunner start(AccountRepository accountRepository, UserRepository userRepository) {
+	//@Bean
+	CommandLineRunner start(UserRepository userRepository) {
 		return args -> {
-//
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-			User user1 = new User(1,"sara","christol",new Date(),"0600606","1 rue henri ","sara@mail.com",encoder.encode("0000"),null,null);
-			userRepository.save(user1);
-//			Account account1 = new Account(1, "swift", 555, "hhhh",user1,null);
-//			accountRepository.save(account1);
 
+			Stream.of("jean","sara","ilyane","rania").forEach(
+					name -> {
+						User user = new User();
+						user.setFirstName(name);
+						user.setLastName(name + "Last");
+						user.setEmail(name + "@gmail.com");
+						user.setBirthday(new Date());
+						user.setPhone("0000");
+						user.setAdress("1 rue " + name);
+						user.setPassword(encoder.encode(name));
+						userRepository.save(user);
+					}
+			);
+	    };
 
-		};
-	}
+}
 }

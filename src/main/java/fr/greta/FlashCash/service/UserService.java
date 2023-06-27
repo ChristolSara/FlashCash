@@ -14,13 +14,11 @@ import org.springframework.validation.BindingResult;
 public class UserService {
     private UserRepository userRepository;
 
-    public void addUser(@Valid User user, BindingResult result) {
+    public User addUser(@Valid User user, BindingResult result) {
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
-            user.setPassword(user.getPassword());
-            userRepository.save(user);
-
         }
+        return  userRepository.save(user);
     }
 }

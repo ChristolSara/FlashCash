@@ -32,9 +32,9 @@ public class User {
     private String email;
     @NotBlank(message = "password is mandatory")
     private String password;
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     private  Account account;
     @OneToMany(mappedBy = "user", fetch=FetchType.LAZY)
-    private List<beneficiary> beneficiaryList;
+    private List<Beneficiary> beneficiaryList;
 
 }
