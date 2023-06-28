@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>add account</title>
-    <link  href="../bootstrap.min.css" rel="stylesheet">
-    <link  href="../style.css" rel="stylesheet">
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,38 +16,44 @@
 <body>
 <div layout:fragment="content">
 
-    <form   action="#" th:action="@{/addAccount}" th:object="${account}" method="post" >
+    <div class="form-holder">
 
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+        <h2>Create Account</h2>
+
+        <form class="col-md-4" action="#" th:action="@{/addAccount}" th:object="${account}" method="post">
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input name="swift" class="form-control" th:value="${account.swift}" placeholder="swift" type="text">
             </div>
-            <input name="swift" class="form-control" th:value="${account.swift}"placeholder="swift" type="text">
-        </div>
 
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input name="amount" class="form-control" th:value="${account.amount}" placeholder="amount"
+                       type="number">
             </div>
-            <input name="amount" class="form-control" th:value="${account.amount}" placeholder="amount" type="number">
-        </div>
-        <!-- form-group// -->
-        <div class="form-group input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-            </div>
-            <input name="iban" class="form-control" th:value="${account.iban}" placeholder="iban" type="text">
-        </div> <!-- form-group// -->
+            <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                </div>
+                <input name="iban" class="form-control" th:value="${account.iban}" placeholder="iban" type="text">
+            </div> <!-- form-group// -->
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-        </div> <!-- form-group// -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary border-blue"> Create Account</button>
+            </div> <!-- form-group// -->
 
 
-        <p class="text-center">Have an account? <a th:href="@{login}">Log In</a> </p>
-    </form>
+            <p class="text-center">Have an account? <a th:href="@{login}">Log In</a></p>
+        </form>
 
 
+    </div>
 </div>
 
 </body>

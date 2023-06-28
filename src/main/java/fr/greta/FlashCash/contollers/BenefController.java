@@ -2,6 +2,7 @@ package fr.greta.FlashCash.contollers;
 
 import fr.greta.FlashCash.models.Account;
 import fr.greta.FlashCash.models.Beneficiary;
+import fr.greta.FlashCash.models.User;
 import fr.greta.FlashCash.service.BeneficiaryService;
 import fr.greta.FlashCash.service.SessionService;
 import jakarta.validation.Valid;
@@ -31,6 +32,8 @@ public class BenefController {
 
     @GetMapping("/beneficiary")
     public String listBeneficiary(Model model){
+        User user=sessionService.sessionUser();
+        model.addAttribute(user);
         Beneficiary beneficiary= new Beneficiary();
         model.addAttribute(beneficiary);
         model.addAttribute( beneficiaryService.beneficiaryList());

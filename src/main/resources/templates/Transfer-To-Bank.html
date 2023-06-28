@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="/layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer-To-Bank</title>
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="form-holder">
+
+
+        <h2>Transfer To Bank</h2>
+
+        <form class="col-md-4" th:action="@{/addTransfer}" th:object="${operation}" method="post">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1" >From User</label>
+                <p th:text="${user.firstName}" ></p>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="exampleFormControlTextarea1">To Beneficiary</label>
+                <select class="custom-select" th:value="${operation.beneficiary}">
+                    <option selected>Choose...</option>
+                    <option value="1">Beneficiary 1</option>
+                    <option value="2">Beneficiary 2</option>
+                    <option value="3">Beneficiary 3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Amount</label>
+                <input type="number" min="0" max="10000" step="1"  name="amount"  th:value="${operation.amount}"   placeholder="amount" required="required">
+
+
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Motif</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-secondary border-blue">Envoyer</button>
+
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
