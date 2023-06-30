@@ -15,6 +15,35 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <div class="form-holder">
+        <h2>Account Informations </h2>
+        <form class="col-md-4">
+
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Swift</th>
+                        <th>Iban</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr th:object="${account}" >
+                        <td th:text="${account.id}"></td>
+                        <td th:text="${account.swift}"></td>
+                        <td th:text="${account.iban}"></td>
+                        <td th:text="${account.amount}"></td>
+
+
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </form>
+    </div>
+
 
     <div class="form-holder">
 
@@ -27,6 +56,7 @@
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
                 <input name="swift" class="form-control" th:value="${account.swift}" placeholder="swift" type="text">
+                <span class="text-danger" th:errors="${account.swift}"></span>
             </div>
 
             <div class="form-group input-group">
@@ -35,6 +65,7 @@
                 </div>
                 <input name="amount" class="form-control" th:value="${account.amount}" placeholder="amount"
                        type="number">
+                <span class="text-danger" th:errors="${account.amount}"></span>
             </div>
             <!-- form-group// -->
             <div class="form-group input-group">
@@ -42,6 +73,7 @@
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
                 <input name="iban" class="form-control" th:value="${account.iban}" placeholder="iban" type="text">
+                <span class="text-danger" th:errors="${account.iban}"></span>
             </div> <!-- form-group// -->
 
             <div class="form-group">

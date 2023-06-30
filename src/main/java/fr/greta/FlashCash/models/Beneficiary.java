@@ -2,6 +2,7 @@ package fr.greta.FlashCash.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,11 @@ public class Beneficiary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "name is mandatory")
     private String name;
-    private String iban;
-    private float amount;
+    @NotBlank(message = "email is mandatory")
+    private String email;
+    private float amount =0;
     @ManyToOne
     private User user;
 

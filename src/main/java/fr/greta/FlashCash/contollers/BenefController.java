@@ -13,30 +13,44 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 public class BenefController {
     private final SessionService sessionService;
     private BeneficiaryService beneficiaryService;
-//    @GetMapping("/beneficiary")
-//    String account(Model model) {
-//        Beneficiary beneficiary = new Beneficiary();
-//        model.addAttribute(beneficiary);
-//        return "beneficiary";
-//    }
+
     @PostMapping("/addBeneficiary")
     public String addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result, Model model) {
-        beneficiaryService.addBeneficiary(beneficiary,result);
-        return "beneficiary";
+        User user = sessionService.sessionUser();
+        beneficiary.setUser(user);
+        if (result.hasErrors()) {
+            model.addAttribute(user);
+            return "beneficiary";
+        }
+
+        List<Beneficiary> beneficiaryList = beneficiaryService.beneficiaryList();
+        for (Beneficiary beneficiary1 : beneficiaryList) {
+            if (beneficiary.getEmail().equals(beneficiary1.getEmail())) {
+                model.addAttribute(user);
+                return "404";
+            }
+        }
+        beneficiaryService.addBeneficiary(beneficiary, result);
+        model.addAttribute(user);
+        model.addAttribute(beneficiaryService.beneficiaryList());
+
+        return "home";
     }
 
     @GetMapping("/beneficiary")
-    public String listBeneficiary(Model model){
-        User user=sessionService.sessionUser();
+    public String listBeneficiary(Model model) {
+        User user = sessionService.sessionUser();
         model.addAttribute(user);
-        Beneficiary beneficiary= new Beneficiary();
+        Beneficiary beneficiary = new Beneficiary();
         model.addAttribute(beneficiary);
-        model.addAttribute( beneficiaryService.beneficiaryList());
+        model.addAttribute(beneficiaryService.beneficiaryList());
         return "beneficiary";
     }
 

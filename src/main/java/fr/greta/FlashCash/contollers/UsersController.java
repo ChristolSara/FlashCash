@@ -1,20 +1,16 @@
 package fr.greta.FlashCash.contollers;
 
 import fr.greta.FlashCash.models.User;
-import fr.greta.FlashCash.repository.UserRepository;
 
 import fr.greta.FlashCash.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -38,8 +34,10 @@ public class UsersController {
     }
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
-       userService.addUser(user,result);
-        return "login";
+        if (!result.hasErrors()) {
+            userService.addUser(user);
+            return "login";
+        }return "signUp";
     }
 //    @PostMapping("user/update/{id}")
 //    public  String updateUser(Integer id,Model model){

@@ -4,14 +4,13 @@
       layout:decorate="/layout.html">
 <head>
     <meta charset="UTF-8">
-    <title>Transfer-To-Bank</title>
+    <title>Transfer-To-Benef</title>
     <link href="../bootstrap.min.css" rel="stylesheet">
     <link href="../style.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
 </head>
 
 <body>
@@ -19,28 +18,29 @@
     <div class="form-holder">
 
 
-        <h2>Transfer To Bank</h2>
+        <h2>Transfer To Benef</h2>
 
-        <form class="col-md-4" th:action="@{/addTransfer}" th:object="${operation}" method="post">
+        <form class="col-md-4" th:object="${operation}" method="post">
             <div class="form-group">
-                <label  class="form-label">Account Name</label>
-                <label th:text="${user.firstName}"></label>
-
-                <input  type="hidden"  th:value="${user.firstName}" ></input>
-
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1" >From Account </label>
-                <input name="amount"  th:text="${user.account.amount}" th:value="${user.account.amount}"></input>
+                <label for="exampleFormControlTextarea1" >From User</label>
+                <p th:text="${user.firstName}" ></p>
 
             </div>
 
 
-
-
             <div class="form-group">
+
+                <label for="exampleFormControlTextarea1">To Beneficiary</label>
+                <select class="custom-select" >
+                    <option selected>Choose...</option>
+                    <option th:each="p:${beneficiaryList}" th:text="${p.name}"></option>
+
+                </select>
+            </div>
+
+            <div class="form-group" >
                 <label for="exampleFormControlTextarea1">Amount</label>
-                <input type="number" min="0" max="10000"  name="amount"  th:value="${operation.amount}"   placeholder="amount" required="required">
+                <input type="number" min="0" max="10000" step="1"  name="amount"  th:value="${operation.amount}"   placeholder="amount" required="required">
 
 
             </div>

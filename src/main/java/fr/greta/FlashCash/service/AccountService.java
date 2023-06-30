@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class AccountService {
@@ -17,9 +19,11 @@ public class AccountService {
 
     public void addAccount(@Valid Account account, BindingResult result) {
 
-        if (!result.hasErrors()) {
-            account.setUser(sessionService.sessionUser());
+
+        account.setUser(sessionService.sessionUser());
          accountRepository.save(account);
-        }
+
     }
+
+
 }

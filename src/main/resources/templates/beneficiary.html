@@ -11,93 +11,56 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
 </head>
 <body>
 <div layout:fragment="content">
 
-    <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="form-holder">
 
-        <div class="card card0 border-0">
+        <h2>Add Beneficiary</h2>
 
-            <div class="row d-flex">
-                <div class="col-lg-6">
-                    <h2>List Beneficiary</h2>
-                    <div class="card1 pb-5">
-                        <div class="card-body">
+        <form class="col-md-4"  action="#" th:action="@{/addBeneficiary}"
+              th:object="${beneficiary}"
+              method="post">
 
-                            <div class="table-responsive">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>iban</th>
-                                        <th>amount</th>
-                                    </tr>
-                                    <tr th:each="p:${beneficiaryList}">
-                                        <td th:text="${p.id}"></td>
-                                        <td th:text="${p.name}"></td>
-                                        <td th:text="${p.iban}"></td>
-                                        <td th:text="${p.amount}"></td>
-
-
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-
-
-                <div class="col-lg-6">
-                    <div class="card2 card border-0 px-4 py-5">
-
-                        <h2>Add Beneficiary</h2>
-
-                        <form class="form-signin" action="#" th:action="@{/addBeneficiary}"
-                              th:object="${beneficiary}"
-                              method="post">
-
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                </div>
-                                <input name="name" class="form-control" th:value="${beneficiary.name}"
-                                       placeholder="name"
-                                       type="text">
-                            </div>
-
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                </div>
-                                <input name="iban" class="form-control" th:value="${beneficiary.iban}"
-                                       placeholder="iban"
-                                       type="text">
-                            </div>
-                            <!-- form-group// -->
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                                </div>
-                                <input name="amount" class="form-control" th:value="${beneficiary.amount}"
-                                       placeholder="amount"
-                                       type="number">
-                            </div> <!-- form-group// -->
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-secondary border-blue"> Add Beneficiary</button>
-                            </div> <!-- form-group// -->
-
-                        </form>
-                    </div>
-                </div>
-
-
+                <input name="name" class="form-control" th:value="${beneficiary.name}"
+                       placeholder="name"
+                       type="text">
+                <span class="text-danger" th:errors="${beneficiary.name}"></span>
             </div>
-        </div>
+
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                </div>
+                <input name="email" class="form-control" th:value="${beneficiary.email}"
+                       placeholder="email"
+                       type="text">
+                <span class="text-danger" th:errors="${beneficiary.email}"></span>
+            </div>
+            <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-euro-sign"></i> </span>
+                </div>
+                <input name="amount" class="form-control" th:value="${beneficiary.amount}"
+                       placeholder="amount"
+                       type="number">
+                <span class="text-danger" th:errors="${beneficiary.amount}"></span>
+            </div> <!-- form-group// -->
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary border-blue"> Add Beneficiary</button>
+            </div> <!-- form-group// -->
+
+        </form>
     </div>
+
 </div>
 </body>
 </html>
