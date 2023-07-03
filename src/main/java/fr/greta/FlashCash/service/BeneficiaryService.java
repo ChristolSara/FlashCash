@@ -1,7 +1,9 @@
 package fr.greta.FlashCash.service;
 
 import fr.greta.FlashCash.models.Beneficiary;
+import fr.greta.FlashCash.models.User;
 import fr.greta.FlashCash.repository.BeneficiaryRepository;
+import fr.greta.FlashCash.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,18 +15,30 @@ import java.util.List;
 @AllArgsConstructor
 public class BeneficiaryService {
     private final BeneficiaryRepository beneficiaryRepository;
-private  final SessionService sessionService;
+    private final UserRepository userRepository;
+    private final SessionService sessionService;
 
     public Beneficiary addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result) {
-        if (!result.hasErrors()) {
 
-            beneficiary.setUser(sessionService.sessionUser());
+        User user = sessionService.sessionUser();
+        List<Beneficiary> beneficiaryList = user.getBeneficiaryList();
+
+        if (!result.hasErrors() && !beneficiaryList.contains(beneficiary)) {
+
+            beneficiary.setUser(user);
+            user.getBeneficiaryList().add(beneficiary);
+
+            userRepository.save(user);
+            return beneficiaryRepository.save(beneficiary);
         }
-        return   beneficiaryRepository.save(beneficiary);
+        return beneficiary;
     }
 
-    public List<Beneficiary> beneficiaryList (){
 
-        return  beneficiaryRepository.findAll();
+
+
+    public List<Beneficiary> beneficiaryList() {
+
+        return beneficiaryRepository.findAll();
     }
 }

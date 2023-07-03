@@ -40,36 +40,13 @@ public class TransferToBankController {
         return "Transfer-To-Bank";
     }
     @PostMapping("/addTransfer")
-    public String addTransferToBank(Model model, Operation operation) {
-        User user = sessionService.sessionUser();
-        Account account = user.getAccount();
+    public String addTransferToBank(Model model, Operation operation,Beneficiary beneficiary) {
 
-        float amountUser = account.getAmount();
-        float amount = operation.getAmount();
-
-        if(amountUser > amount){
-
-            account.setAmount(amountUser - amount);
-            user.setAccount(account);
-            model.addAttribute(user);
-            return "/Transfer-To-Bank";
-        }
-        model.addAttribute(user);
+        model.addAttribute(transferToBankService.addTransferToBank(operation));
         return "/Transfer-To-Bank";
     }
 
-    @GetMapping("/Transfer-To-Benef")
-    public String transferToBenef(Model model) {
-        Operation operation = new Operation();
-        model.addAttribute(operation);
 
-        User user = sessionService.sessionUser();
-        List<Beneficiary> beneficiaryList = user.getBeneficiaryList();
-        model.addAttribute(beneficiaryList);
-        model.addAttribute(user);
-
-        return "/Transfer-To-Benef";
-    }
 
 
 

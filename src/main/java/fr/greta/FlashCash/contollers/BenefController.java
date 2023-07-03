@@ -3,6 +3,8 @@ package fr.greta.FlashCash.contollers;
 import fr.greta.FlashCash.models.Account;
 import fr.greta.FlashCash.models.Beneficiary;
 import fr.greta.FlashCash.models.User;
+import fr.greta.FlashCash.repository.BeneficiaryRepository;
+import fr.greta.FlashCash.repository.UserRepository;
 import fr.greta.FlashCash.service.BeneficiaryService;
 import fr.greta.FlashCash.service.SessionService;
 import jakarta.validation.Valid;
@@ -19,29 +21,16 @@ import java.util.List;
 @AllArgsConstructor
 public class BenefController {
     private final SessionService sessionService;
+
     private BeneficiaryService beneficiaryService;
 
     @PostMapping("/addBeneficiary")
     public String addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result, Model model) {
         User user = sessionService.sessionUser();
-        beneficiary.setUser(user);
-        if (result.hasErrors()) {
-            model.addAttribute(user);
-            return "beneficiary";
-        }
-
-        List<Beneficiary> beneficiaryList = beneficiaryService.beneficiaryList();
-        for (Beneficiary beneficiary1 : beneficiaryList) {
-            if (beneficiary.getEmail().equals(beneficiary1.getEmail())) {
-                model.addAttribute(user);
-                return "404";
-            }
-        }
-        beneficiaryService.addBeneficiary(beneficiary, result);
         model.addAttribute(user);
-        model.addAttribute(beneficiaryService.beneficiaryList());
 
-        return "home";
+         model.addAttribute(beneficiaryService.addBeneficiary(beneficiary, result));
+        return "/beneficiary";
     }
 
     @GetMapping("/beneficiary")
@@ -51,7 +40,7 @@ public class BenefController {
         Beneficiary beneficiary = new Beneficiary();
         model.addAttribute(beneficiary);
         model.addAttribute(beneficiaryService.beneficiaryList());
-        return "beneficiary";
+        return "/beneficiary";
     }
 
 }

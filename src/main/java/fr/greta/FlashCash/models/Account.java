@@ -19,7 +19,7 @@ public class Account {
     private int id;
     @Size(min = 2, max = 30)
     private  String swift;
-    @Min(value = 10, message = "amount can not be less than 0")
+    //@Min(value = 10, message = "amount can not be less than 0")
     private float amount;
     @Size(min = 20, max =34 , message
             = "iban must be between 27 and 34 characters")
@@ -28,4 +28,7 @@ public class Account {
     private User user;
 
 
+
+    public Account(String cic, int i, String s, User user) {
+    }
 }

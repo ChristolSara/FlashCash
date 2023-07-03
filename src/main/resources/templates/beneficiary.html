@@ -48,9 +48,9 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-euro-sign"></i> </span>
                 </div>
-                <input name="amount" class="form-control" th:value="${beneficiary.amount}"
+                <label name="amount" class="form-control" th:value="${beneficiary.amount}"
                        placeholder="amount"
-                       type="number">
+                       type="number"  th:text="${beneficiary.amount}"></label>
                 <span class="text-danger" th:errors="${beneficiary.amount}"></span>
             </div> <!-- form-group// -->
 

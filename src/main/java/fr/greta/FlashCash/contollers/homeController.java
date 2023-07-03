@@ -22,7 +22,7 @@ public class homeController {
     public String home(Model model){
         User user = sessionService.sessionUser();
         Account account=user.getAccount();
-        model.addAttribute(beneficiaryService.beneficiaryList());
+        model.addAttribute(user.getBeneficiaryList());
         model.addAttribute(account);
         model.addAttribute(user);
         return "/home";

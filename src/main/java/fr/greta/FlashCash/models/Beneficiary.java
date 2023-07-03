@@ -20,7 +20,7 @@ public class Beneficiary {
     private String name;
     @NotBlank(message = "email is mandatory")
     private String email;
-    private float amount =0;
+    private float amount = 0;
     @ManyToOne
     private User user;
 
