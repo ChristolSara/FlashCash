@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -21,9 +22,9 @@ public class BeneficiaryService {
     public Beneficiary addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result) {
 
         User user = sessionService.sessionUser();
-        List<Beneficiary> beneficiaryList = user.getBeneficiaryList();
+        Collection<Beneficiary> beneficiaryList = user.getBeneficiaryList();
 
-        if (!result.hasErrors() && !beneficiaryList.contains(beneficiary)) {
+        if ((!result.hasErrors()) && (!beneficiaryList.contains(beneficiary))) {
 
             beneficiary.setUser(user);
             user.getBeneficiaryList().add(beneficiary);
@@ -37,8 +38,5 @@ public class BeneficiaryService {
 
 
 
-    public List<Beneficiary> beneficiaryList() {
 
-        return beneficiaryRepository.findAll();
-    }
 }

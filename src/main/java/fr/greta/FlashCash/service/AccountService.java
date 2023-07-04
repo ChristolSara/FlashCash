@@ -14,15 +14,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AccountService {
-    private final  AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
     private final SessionService sessionService;
 
-    public void addAccount(@Valid Account account, BindingResult result) {
+    public Account addAccount(@Valid Account account, BindingResult result) {
 
-
-        account.setUser(sessionService.sessionUser());
-         accountRepository.save(account);
-
+        User user = sessionService.sessionUser();
+        if ((!result.hasErrors()) && (user.getAccount() == null)) {
+            account.setUser(user);
+            return accountRepository.save(account);
+        }
+        return account;
     }
 
 

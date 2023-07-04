@@ -19,32 +19,21 @@ import java.util.List;
 @AllArgsConstructor
 public class accountController {
     private AccountService accountService;
-    private final BeneficiaryService beneficiaryService;
     private final SessionService sessionService;
 
     @GetMapping("/account")
     String account(Model model) {
         User user = sessionService.sessionUser();
         model.addAttribute(user);
-        Account account = new Account();
-        model.addAttribute(account);
+        model.addAttribute("account",user.getAccount());
         return "account";
     }
 
     @PostMapping("/addAccount")
     public String addAccount(@Valid Account account, BindingResult result, Model model) {
-        User user = sessionService.sessionUser();
-        account.setUser(user);
-
-        if (!result.hasErrors()) {
-            accountService.addAccount(account, result);
-            model.addAttribute(user);
-            return "account";
-        }
-
-
-        model.addAttribute(user);
-        return "404";
+        model.addAttribute("user",sessionService.sessionUser());
+        model.addAttribute(accountService.addAccount(account,result));
+        return "/home";
     }
 
 

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -24,7 +25,7 @@ public class FlashCashApplication {
 	CommandLineRunner start(UserRepository userRepository,AccountRepository accountRepository) {
 		return args -> {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
+//create users for example
 
             Stream.of("jean", "sara", "ilyane", "rania").forEach(
                     name -> {
@@ -39,7 +40,9 @@ public class FlashCashApplication {
                         userRepository.save(user);
                     }
             );
-
+//create account for list of users
+            List<String>  bank= List.of(new String[]{"CIC", "LCL", "BANQUE POSTALE", "CREDT AGRICOLE"});
+            Random rand = new Random();
 
             List<User> userList = userRepository.findAll();
             for (User user : userList) {
@@ -47,7 +50,7 @@ public class FlashCashApplication {
                 Account account = new Account();
                 account.setUser(user);
                 account.setAmount(200);
-                account.setSwift("cic banque");
+                account.setSwift(bank.get(rand.nextInt(bank.size())));
                 account.setIban(user.getFirstName() + "2000 2054 6544 4565 w065");
                 accountRepository.save(account);
 

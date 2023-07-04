@@ -23,8 +23,4 @@ public class UserService {
         return  userRepository.save(user);
     }
 
-    public List<Beneficiary> beneficiaryList(){
-        User user=sessionService.sessionUser();
-        return user.getBeneficiaryList();
-    }
 }

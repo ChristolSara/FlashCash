@@ -36,9 +36,9 @@
             <div class="form-group">
 
                 <label for="exampleFormControlTextarea1">To Beneficiary</label>
-                <select class="custom-select" >
+                <select class="custom-select" for="beneficiary" name="beneficiary" th:value="beneficiary." >
                     <option selected>Choose...</option>
-                    <option th:each="p:${beneficiaryList}" th:text="${p.name}"></option>
+                    <option  th:each="beneficiary : ${listBeneficiary}"   th:text="${beneficiary.name}"></option>
 
                 </select>
             </div>

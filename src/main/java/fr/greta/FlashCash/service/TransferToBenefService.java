@@ -10,6 +10,8 @@ import fr.greta.FlashCash.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 @AllArgsConstructor
 public class TransferToBenefService {
@@ -18,23 +20,33 @@ public class TransferToBenefService {
     private final UserRepository userRepository;
     private final SessionService sessionService;
 
-    public User addTransferToBenef(Operation operation) {
+    public User addTransferToBenef(Operation operation,Beneficiary beneficiary) {
 
         User user = sessionService.sessionUser();
+
+
+
         float amountUser = user.getAccount().getAmount();
 
+
         float mtn = operation.getAmount();
-        Beneficiary beneficiary = operation.getBeneficiary();
+
         float amountBenef  = beneficiary.getAmount();
 
         if(amountUser >= mtn) {
 
             user.getAccount().setAmount(amountUser - mtn);
-            beneficiary.setAmount(amountBenef+mtn);
+            beneficiary.setAmount(amountBenef + mtn);
             beneficiaryRepository.save(beneficiary);
 
-            return userRepository.save(user);
+            //save operation
+            operation.setAccount(user.getAccount());
+            operation.setDate(new Date());
+            operation.setBeneficiary(beneficiary);
 
+            operationRepository.save(operation);
+
+            return userRepository.save(user);
         }
 
         return user;

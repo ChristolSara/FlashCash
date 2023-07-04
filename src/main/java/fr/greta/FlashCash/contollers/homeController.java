@@ -21,10 +21,9 @@ public class homeController {
     @GetMapping(value={"/","/home"})
     public String home(Model model){
         User user = sessionService.sessionUser();
-        Account account=user.getAccount();
-        model.addAttribute(user.getBeneficiaryList());
-        model.addAttribute(account);
-        model.addAttribute(user);
+        model.addAttribute("listBeneficiary",user.getBeneficiaryList());
+        model.addAttribute("account",user.getAccount());
+        model.addAttribute("user",user);
         return "/home";
     }
 //    @GetMapping("/home")

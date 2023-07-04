@@ -19,6 +19,34 @@
 </head>
 
 <div layout:fragment="content">
+    <div class="form-holder">
+        <h2>Account</h2>
+        <form class="col-md-4">
+
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Swift</th>
+                        <th>Iban</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr th:object="${account}">
+                        <td th:text="${account.id}"></td>
+                        <td th:text="${account.swift}"></td>
+                        <td th:text="${account.iban}"></td>
+                        <td th:text="${account.amount}"></td>
+
+
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </form>
+    </div>
 
     <div class="form-holder">
 
@@ -35,7 +63,7 @@
                         <th>Email</th>
                         <th>Amount</th>
                     </tr>
-                    <tr th:each="p:${beneficiaryList}">
+                    <tr th:each="p:${listBeneficiary}">
                         <td th:text="${p.id}"></td>
                         <td th:text="${p.name}"></td>
                         <td th:text="${p.email}"></td>
@@ -50,34 +78,7 @@
     </form>
 
     </div>
-    <div class="form-holder">
-        <h2>List Account</h2>
-        <form class="col-md-4">
 
-
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Swift</th>
-                        <th>Iban</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr th:each="a:${accountList}">
-                        <td th:text="${a.id}"></td>
-                        <td th:text="${a.swift}"></td>
-                        <td th:text="${a.iban}"></td>
-                        <td th:text="${a.amount}"></td>
-
-
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-
-        </form>
-</div>
 
 
 </div>

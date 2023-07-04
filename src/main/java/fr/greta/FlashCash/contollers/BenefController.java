@@ -24,23 +24,24 @@ public class BenefController {
 
     private BeneficiaryService beneficiaryService;
 
-    @PostMapping("/addBeneficiary")
-    public String addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result, Model model) {
-        User user = sessionService.sessionUser();
-        model.addAttribute(user);
-
-         model.addAttribute(beneficiaryService.addBeneficiary(beneficiary, result));
-        return "/beneficiary";
-    }
 
     @GetMapping("/beneficiary")
     public String listBeneficiary(Model model) {
         User user = sessionService.sessionUser();
-        model.addAttribute(user);
         Beneficiary beneficiary = new Beneficiary();
-        model.addAttribute(beneficiary);
-        model.addAttribute(beneficiaryService.beneficiaryList());
+        model.addAttribute(user);
+        model.addAttribute("beneficiary",new Beneficiary());
+        model.addAttribute("listBeneficiary",user.getBeneficiaryList());
         return "/beneficiary";
     }
+
+    @PostMapping("/addBeneficiary")
+    public String addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result, Model model) {
+        model.addAttribute("user",sessionService.sessionUser());
+        model.addAttribute("account",sessionService.sessionUser().getAccount());
+         model.addAttribute(beneficiaryService.addBeneficiary(beneficiary, result));
+        return "/home";
+    }
+
 
 }

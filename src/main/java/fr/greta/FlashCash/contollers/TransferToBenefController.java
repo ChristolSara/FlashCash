@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -20,20 +21,24 @@ public class TransferToBenefController {
     private final TransferToBenefService transferToBenefService;
     @GetMapping("/Transfer-To-Benef")
     public String transferToBenef(Model model) {
-        Operation operation = new Operation();
-        model.addAttribute(operation);
 
         User user = sessionService.sessionUser();
-        List<Beneficiary> beneficiaryList = user.getBeneficiaryList();
-        model.addAttribute(beneficiaryList);
+        model.addAttribute("operation",new Operation());
+        model.addAttribute("beneficiary",new Beneficiary());
+        model.addAttribute("listBeneficiary",user.getBeneficiaryList());
         model.addAttribute(user);
 
         return "/Transfer-To-Benef";
     }
     @PostMapping("/addTransferBenef")
-    public String addTransferToBenef(Model model, Operation operation) {
-        model.addAttribute(transferToBenefService.addTransferToBenef(operation));
-        return "/Transfer-To-Benef";
+    public String addTransferToBenef(Model model, Operation operation,Beneficiary beneficiary) {
+
+        model.addAttribute(transferToBenefService.addTransferToBenef(operation,beneficiary));
+        model.addAttribute("user",sessionService.sessionUser());
+        model.addAttribute("account",sessionService.sessionUser().getAccount());
+        model.addAttribute("listBeneficiary",sessionService.sessionUser().getBeneficiaryList());
+
+        return "/home";
     }
 
 }

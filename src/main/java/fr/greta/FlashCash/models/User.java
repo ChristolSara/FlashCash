@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class User {
     private String password;
     @OneToOne(mappedBy = "user")
     private  Account account;
-    @OneToMany(mappedBy = "user", fetch=FetchType.LAZY)
-    private List<Beneficiary> beneficiaryList;
+    @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)
+    private Collection<Beneficiary> beneficiaryList;
 
 }

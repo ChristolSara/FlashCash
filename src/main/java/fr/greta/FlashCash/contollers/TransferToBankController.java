@@ -22,9 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TransferToBankController {
     private final TransferToBankService transferToBankService;
-    private final BeneficiaryService beneficiaryService;
 
-    private final UserService userService;
     private final SessionService sessionService;
 
 
@@ -41,9 +39,12 @@ public class TransferToBankController {
     }
     @PostMapping("/addTransfer")
     public String addTransferToBank(Model model, Operation operation,Beneficiary beneficiary) {
-
         model.addAttribute(transferToBankService.addTransferToBank(operation));
-        return "/Transfer-To-Bank";
+        model.addAttribute("user",sessionService.sessionUser());
+        model.addAttribute("account",sessionService.sessionUser().getAccount());
+        model.addAttribute("listBeneficiary",sessionService.sessionUser().getBeneficiaryList());
+
+        return "/home";
     }
 
 
