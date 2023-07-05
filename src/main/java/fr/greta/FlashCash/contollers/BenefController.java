@@ -39,6 +39,7 @@ public class BenefController {
     public String addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result, Model model) {
         model.addAttribute("user",sessionService.sessionUser());
         model.addAttribute("account",sessionService.sessionUser().getAccount());
+        model.addAttribute("listBeneficiary",sessionService.sessionUser().getBeneficiaryList());
          model.addAttribute(beneficiaryService.addBeneficiary(beneficiary, result));
         return "/home";
     }

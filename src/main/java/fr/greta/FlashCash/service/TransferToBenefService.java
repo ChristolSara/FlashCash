@@ -10,8 +10,10 @@ import fr.greta.FlashCash.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +23,25 @@ public class TransferToBenefService {
     private final UserRepository userRepository;
     private final SessionService sessionService;
 
-    public User addTransferToBenef(Operation operation,Beneficiary beneficiary) {
+
+    public List<String> findAllBeneficiaryEmail () {
+
+        List<String> findAllBeneficiaryByEmail = new ArrayList<>();
+        for(Beneficiary beneficiary  : sessionService.sessionUser().getBeneficiaryList()){
+
+            findAllBeneficiaryByEmail.add(beneficiary.getEmail());
+        }
+        return  findAllBeneficiaryByEmail;
+
+    }
+
+
+
+    public User addTransferToBenef(Operation operation) {
+
+
+
+       Beneficiary beneficiary = operation.getBeneficiary();
 
         User user = sessionService.sessionUser();
 

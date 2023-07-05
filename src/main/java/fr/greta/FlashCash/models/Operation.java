@@ -19,6 +19,7 @@ public class Operation {
     private float amount;
     @ManyToOne
     private Account account;
+
     @ManyToOne
     private Beneficiary beneficiary;
 

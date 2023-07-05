@@ -24,13 +24,16 @@ public class BeneficiaryService {
         User user = sessionService.sessionUser();
         Collection<Beneficiary> beneficiaryList = user.getBeneficiaryList();
 
-        if ((!result.hasErrors()) && (!beneficiaryList.contains(beneficiary))) {
 
-            beneficiary.setUser(user);
-            user.getBeneficiaryList().add(beneficiary);
+            for (Beneficiary beneficiary1:beneficiaryList){
+                if (!(result.hasErrors()) || !(beneficiary1.getEmail().equals(beneficiary.getEmail()))){
+                    beneficiary.setUser(user);
+                    user.getBeneficiaryList().add(beneficiary);
 
-            userRepository.save(user);
-            return beneficiaryRepository.save(beneficiary);
+                    userRepository.save(user);
+
+            }
+                return beneficiaryRepository.save(beneficiary);
         }
         return beneficiary;
     }

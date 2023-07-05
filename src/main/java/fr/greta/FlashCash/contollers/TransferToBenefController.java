@@ -31,9 +31,10 @@ public class TransferToBenefController {
         return "/Transfer-To-Benef";
     }
     @PostMapping("/addTransferBenef")
-    public String addTransferToBenef(Model model, Operation operation,Beneficiary beneficiary) {
 
-        model.addAttribute(transferToBenefService.addTransferToBenef(operation,beneficiary));
+    public String addTransferToBenef(Model model, Operation operation) {
+
+        model.addAttribute(transferToBenefService.addTransferToBenef(operation));
         model.addAttribute("user",sessionService.sessionUser());
         model.addAttribute("account",sessionService.sessionUser().getAccount());
         model.addAttribute("listBeneficiary",sessionService.sessionUser().getBeneficiaryList());
