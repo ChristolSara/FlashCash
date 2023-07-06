@@ -37,11 +37,16 @@ public class BenefController {
 
     @PostMapping("/addBeneficiary")
     public String addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result, Model model) {
+        model.addAttribute("beneficiary",beneficiaryService.addBeneficiary(beneficiary, result));
         model.addAttribute("user",sessionService.sessionUser());
         model.addAttribute("account",sessionService.sessionUser().getAccount());
         model.addAttribute("listBeneficiary",sessionService.sessionUser().getBeneficiaryList());
-         model.addAttribute(beneficiaryService.addBeneficiary(beneficiary, result));
         return "/home";
+    }
+    @GetMapping("/delete")
+    public String delete(Integer id) {
+        beneficiaryService.deleteById(id);
+        return "/beneficiary";
     }
 
 

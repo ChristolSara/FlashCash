@@ -37,53 +37,25 @@ public class TransferToBenefService {
 
 
 
-    public User addTransferToBenef(Operation operation) {
-
-
-
-       Beneficiary beneficiary = operation.getBeneficiary();
-
+    public Operation addTransferToBenef(Operation operation) {
         User user = sessionService.sessionUser();
-
-        Collection<Beneficiary> beneficiaryList = user.getBeneficiaryList();
-
-         for (Beneficiary beneficiary1 : beneficiaryList){
-             if(beneficiary1.getName().equals(beneficiary.getName())){
-
-                 beneficiary.setUser(beneficiary1.getUser());
-                 beneficiary.setAmount(beneficiary1.getAmount());
-                 beneficiary.setName(beneficiary1.getName());
-                 beneficiary.setId(beneficiary1.getId());
-                 beneficiary.setEmail(beneficiary1.getEmail());
-
-             }
-        }
+        Beneficiary beneficiary= operation.getBeneficiary();
 
 
+        operation.setAccount(user.getAccount());
+        operation.setDate(new Date());
 
-        float amountUser = user.getAccount().getAmount();
+
+        float mtn = (user.getAccount().getAmount() )- (operation.getAmount());
+        user.getAccount().setAmount(mtn);
+        beneficiary.setAmount(beneficiary.getAmount() + operation.getAmount());
+
+        userRepository.save(user);
+        beneficiaryRepository.save(beneficiary);
+      return   operationRepository.save(operation);
 
 
-        float mtn = operation.getAmount();
 
-        float amountBenef  = beneficiary.getAmount();
 
-        if(amountUser >= mtn) {
-
-            user.getAccount().setAmount(amountUser - mtn);
-            beneficiary.setAmount(amountBenef + mtn);
-            beneficiaryRepository.save(beneficiary);
-
-            //save operation
-            operation.setAccount(user.getAccount());
-            operation.setDate(new Date());
-            operation.setBeneficiary(beneficiary);
-
-            operationRepository.save(operation);
-
-            return userRepository.save(user);
-        }
-
-        return user;
     }
 }

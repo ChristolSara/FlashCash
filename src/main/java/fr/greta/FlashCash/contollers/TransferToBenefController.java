@@ -24,7 +24,6 @@ public class TransferToBenefController {
 
         User user = sessionService.sessionUser();
         model.addAttribute("operation",new Operation());
-        model.addAttribute("beneficiary",new Beneficiary());
         model.addAttribute("listBeneficiary",user.getBeneficiaryList());
         model.addAttribute(user);
 

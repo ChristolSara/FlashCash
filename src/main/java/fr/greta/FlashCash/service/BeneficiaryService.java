@@ -22,24 +22,40 @@ public class BeneficiaryService {
     public Beneficiary addBeneficiary(@Valid Beneficiary beneficiary, BindingResult result) {
 
         User user = sessionService.sessionUser();
+        beneficiary.setUser(user);
         Collection<Beneficiary> beneficiaryList = user.getBeneficiaryList();
 
+        if(beneficiaryList.size()== 0 ){
+            beneficiaryList.add(beneficiary);
+            userRepository.save(user);
+          beneficiaryRepository.save(beneficiary);
 
-            for (Beneficiary beneficiary1:beneficiaryList){
-                if (!(result.hasErrors()) || !(beneficiary1.getEmail().equals(beneficiary.getEmail()))){
-                    beneficiary.setUser(user);
+
+        }else{
+            for (Beneficiary beneficiary1 : beneficiaryList) {
+
+                if (!(result.hasErrors()) && !(beneficiary1.getEmail().equals(beneficiary.getEmail()))) {
+
+
                     user.getBeneficiaryList().add(beneficiary);
 
                     userRepository.save(user);
+                    return beneficiaryRepository.save(beneficiary);
+
+                }
+
 
             }
-                return beneficiaryRepository.save(beneficiary);
+
         }
+
+
+
         return beneficiary;
     }
 
 
-
-
-
+    public void deleteById(Integer id) {
+        beneficiaryRepository.deleteById(id);
+    }
 }

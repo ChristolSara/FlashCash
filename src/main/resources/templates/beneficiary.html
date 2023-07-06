@@ -17,9 +17,11 @@
 <div layout:fragment="content">
     <div class="form-holder">
 
-        <h2>List Beneficiary</h2>
-        <form class="col-md-4">
 
+        <form class="col-md-4">
+            <div class="card">
+                <div class="card-header">List Beneficiary</div>
+                <div class="card-body">
 
             <div class="table-responsive">
                 <table>
@@ -35,26 +37,37 @@
                         <td th:text="${p.name}"></td>
                         <td th:text="${p.email}"></td>
                         <td th:text="${p.amount}"></td>
+                        <td>
+                            <a onclick="return confirm('Etes vous sure?')" class="btn btn-secondary border-blue" th:href="@{delete(id=${p.id})}">
+                                Delete
+                            </a>
+                        </td>
 
 
                     </tr>
                     </thead>
                 </table>
             </div>
+                </div>
+            </div>
 
         </form>
+
 
     </div>
 
     <div class="form-holder">
 
-        <h2>Add Beneficiary</h2>
 
         <form class="col-md-4"  action="#" th:action="@{/addBeneficiary}"
               th:object="${beneficiary}"
               method="post">
+            <div class="card">
+                <div class="card-header">Add Beneficiary</div>
+                <div class="card-body">
 
-            <div class="form-group input-group">
+
+                <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
@@ -88,6 +101,7 @@
                 <button type="submit" class="btn btn-secondary border-blue"> Add Beneficiary</button>
             </div> <!-- form-group// -->
 
+                </div></div>
         </form>
     </div>
 

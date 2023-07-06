@@ -24,5 +24,14 @@ public class Beneficiary {
     @ManyToOne
     private User user;
 
-
+    @Override
+    public String toString() {
+        return "Beneficiary{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", amount=" + amount +
+                ", user=" + user +
+                '}';
+    }
 }
