@@ -28,16 +28,18 @@ public class UsersController {
 //        return "users";
 //    }
 
-    @GetMapping("signUp")
-    public String addUser( User user){
-        return "signUp";
+    @GetMapping("/signUp")
+    public String addUser( User user,Model model){
+        model.addAttribute("user",new User());
+
+        return "/signUp";
     }
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            userService.addUser(user);
-            return "login";
-        }return "signUp";
+            userService.addUser(user,result);
+
+            return "/login";
+
     }
 //    @PostMapping("user/update/{id}")
 //    public  String updateUser(Integer id,Model model){

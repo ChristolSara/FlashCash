@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class homeController {
     private final SessionService sessionService;
-    private final AccountService accountService;
 
     private final BeneficiaryService beneficiaryService;
     @GetMapping(value={"/","/home"})
@@ -26,17 +25,10 @@ public class homeController {
         model.addAttribute("user",user);
         return "/home";
     }
-//    @GetMapping("/home")
-//    public String homePage(Model model){
-//        User user=sessionService.sessionUser();
-//        model.addAttribute(beneficiaryService.beneficiaryList());
-//        model.addAttribute(user);
-//        return "/home";
-//    }
 
     @GetMapping("/login")
     String login() {
-        return "login";
+        return "/login";
     }
 
 }
