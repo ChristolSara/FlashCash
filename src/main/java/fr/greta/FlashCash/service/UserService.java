@@ -17,7 +17,8 @@ import java.util.*;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User addUser(User user) {
+    public User addUser(User user,BindingResult result) {
+
 
         Collection<Beneficiary> beneficiaryList = new ArrayList<>();
         user.setBeneficiaryList(beneficiaryList);
@@ -28,12 +29,12 @@ public class UserService {
         user.setPassword(encoder.encode(user.getPassword()));
         List<User> userList = userRepository.findAll();
 
-        if   ( !userList.contains(user)) {
+        if ( (result.hasErrors()) || ( userList.contains(user))) {
 
-          return   userRepository.save(user);
+          return   user;
         }
 
-        return user;
+        return userRepository.save(user);
 
     }
     public  User updateUser(Integer id){

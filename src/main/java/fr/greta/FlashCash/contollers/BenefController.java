@@ -28,7 +28,6 @@ public class BenefController {
     @GetMapping("/beneficiary")
     public String listBeneficiary(Model model) {
         User user = sessionService.sessionUser();
-        Beneficiary beneficiary = new Beneficiary();
         model.addAttribute(user);
         model.addAttribute("beneficiary",new Beneficiary());
         model.addAttribute("listBeneficiary",user.getBeneficiaryList());
