@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
@@ -33,9 +32,8 @@ public class FlashCashApplication {
                         user.setFirstName(name);
                         user.setLastName(name + "Last");
                         user.setEmail(name + "@gmail.com");
-                        user.setBirthday(new Date());
                         user.setPhone("0000");
-                        user.setAdress("1 rue " + name);
+                        user.setAddress("1 rue " + name);
                         user.setPassword(encoder.encode(name));
                         userRepository.save(user);
                     }

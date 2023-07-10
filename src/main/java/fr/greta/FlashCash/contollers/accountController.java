@@ -3,7 +3,6 @@ package fr.greta.FlashCash.contollers;
 import fr.greta.FlashCash.models.Account;
 import fr.greta.FlashCash.models.User;
 import fr.greta.FlashCash.service.AccountService;
-import fr.greta.FlashCash.service.BeneficiaryService;
 import fr.greta.FlashCash.service.SessionService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
 
 @Controller
 @AllArgsConstructor

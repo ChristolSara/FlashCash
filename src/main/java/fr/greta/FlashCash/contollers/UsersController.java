@@ -1,5 +1,6 @@
 package fr.greta.FlashCash.contollers;
 
+;
 import fr.greta.FlashCash.models.User;
 
 import fr.greta.FlashCash.service.UserService;
@@ -10,9 +11,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 
 
 @Controller
@@ -21,39 +22,28 @@ public class UsersController {
 
     private UserService userService;
 
-
-//    @GetMapping("/users")
-//    public String allUsers(Model model) {
-//        model.addAttribute("users");
-//        return "users";
-//    }
-
     @GetMapping("/signUp")
-    public String addUser( User user,Model model){
+    public String addUser(Model model){
         model.addAttribute("user",new User());
-
-        return "/signUp";
+        return "signUp";
     }
-    @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model) {
-            userService.addUser(user,result);
+    @PostMapping("/AddUser")
+    public String validateUser(@Valid User user, BindingResult result, Model model) {
 
-            return "/login";
-
+        if(result.hasErrors()) return "signUp";
+        model.addAttribute(userService.addUser(user));
+        return "home";
     }
-//    @PostMapping("user/update/{id}")
-//    public  String updateUser(Integer id,Model model){
-//        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("invalid id user"+id));
-//
-//        userRepository.save(user);
-//        return "user/update";
-//    }
-//
-//    @DeleteMapping("user/delete/{id}")
-//    public  void removeUser(@PathVariable Integer id){
-//        User user= userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("invalid id user"+id));
-//        userRepository.delete(user);
-//    }
+    @PostMapping("user/update/{id}")
+    public  String updateUser(Integer id,Model model){
+        userService.updateUser(id);
+        model.addAttribute(userService.updateUser(id));
+        return "user/update";
+    }
+    @DeleteMapping("/user/delete")
+    public  void removeUser(User user){
+        userService.deleteUser(user);
+    }
 
 
 }

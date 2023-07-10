@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor @NoArgsConstructor @Data
@@ -22,12 +20,11 @@ public class User {
     private String firstName;
     @NotBlank(message = "lastname is mandatory")
     private String lastName;
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
+
     @NotBlank(message = "phone is mandatory")
     private String phone;
     @NotBlank(message = "adress is mandatory")
-    private String adress;
+    private String address;
     @Column(unique = true)
     @NotBlank(message = "email is mandatory")
     private String email;

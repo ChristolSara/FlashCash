@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="/layout.html">
+      >
 <head>
     <meta charset="utf-8"/>
-    <title>Home</title>
-    <link  href="../bootstrap.min.css" rel="stylesheet">
-    <link  href="../style.css" rel="stylesheet">
+    <title>SignUp</title>
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </head>
 <body>
-<div layout:fragment="content">
+
     <div class="form-holder">
 
             <h2 class="card-title mt-3 text-center">Create Account</h2>
 
-    <form  action="#" th:action="@{/user/validate}" th:object="${user}" method="post" >
+    <form th:action="@{/AddUser}" th:object="${user}" method="post" >
         <p>
             <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
         </p>
@@ -58,8 +58,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-building"></i> </span>
             </div>
-            <input name="adress" class="form-control" th:value="${user.adress}" placeholder="Adress" type="text">
-            <span class="text-danger" th:errors="${user.adress}"></span>
+            <input name="address" class="form-control" th:value="${user.address}" placeholder="Address" type="text">
+            <span class="text-danger" th:errors="${user.address}"></span>
 
         </div> <!-- form-group end.// -->
         <div class="form-group input-group">
@@ -77,7 +77,7 @@
 
 
 </div>
-</div>
+
 
 </body>
 </html>
