@@ -20,13 +20,13 @@ public class FlashCashApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FlashCashApplication.class, args);
 	}
-	//@Bean
+	@Bean
 	CommandLineRunner start(UserRepository userRepository,AccountRepository accountRepository) {
 		return args -> {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //create users for example
 
-            Stream.of("jean", "sara", "ilyane", "rania").forEach(
+            Stream.of("jean", "sara", "ilyane", "rania","awatef").forEach(
                     name -> {
                         User user = new User();
                         user.setFirstName(name);
