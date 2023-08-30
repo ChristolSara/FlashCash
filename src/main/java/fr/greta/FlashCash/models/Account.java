@@ -28,7 +28,6 @@ public class Account {
     private User user;
 
 
-
     public Account(String cic, int i, String s, User user) {
     }
 }
